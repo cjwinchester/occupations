@@ -17,21 +17,35 @@
       cursor: pointer;
       margin: 0.5rem;
     }
-    p#occupation {
-      font-size: 2rem;
+    p {
       padding: 2rem 0;
+    }
+    span#occupation {
+      font-size: 2rem;
+      padding: 1rem;
       border: 1px dashed #777;
       border-radius: 5px;
+      -webkit-touch-callout: none;
+        -webkit-user-select: none;
+         -khtml-user-select: none;
+           -moz-user-select: none;
+            -ms-user-select: none;
+                user-select: none;
     }
-    p.small {
+    }
+    footer.small {
       font-size: 10px;
     }
   </style>
 </head>
 <body>
   <h1>What should I be when I grow up?</h1>
-  <p id="occupation">[click or tap]</p>
-  <p class="small">Data from <a href="https://www.theonion.com/c/american-voices">The Onion's "American Voices" series</a></p>
+  <p>
+    <span id="occupation">[click or tap]</span>
+  </p>
+  <footer class="small">
+    Data from <a href="https://www.theonion.com/c/american-voices">The Onion's "American Voices" series</a>
+  </footer>
 <script>
 
   var target = document.getElementById('occupation');
