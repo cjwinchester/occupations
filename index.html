@@ -50,13 +50,17 @@
       if (xhr.status === 200) {
         var data = JSON.parse(xhr.responseText);
 
-        function new_word() {
+        function new_word(e) {
           var word = data[Math.floor(Math.random()*data.length)].toUpperCase();
           target.innerHTML = word;
+          e.preventDefault();
+          return false;
         }
 
-        target.addEventListener('click', new_word);
-        document.addEventListener('keyup', new_word);
+        target.addEventListener('mouseup', new_word, false);
+        target.addEventListener('touchend', new_word, false);
+        document.addEventListener('keyup', new_word, false);
+
       } else {
         console.error(xhr.statusText);
       }
