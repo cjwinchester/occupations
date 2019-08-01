@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>What should I be when I grow up?</title>
+  <link rel="shortcut icon" href="/assets/media/favicon.png" />
+  <link rel="canonical" href="https://codywinchester.com/occupations" />
+  <meta name="description" content="Figure out what you should be when you grow up (with some help from The Onion).">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html, body {
+      font-family: 'Courier New', CourierNew, Consolas, monospace;
+      text-align: center;
+      text-overflow: hidden;
+      word-wrap: normal;
+      cursor: pointer;
+      margin: 0.5rem;
+    }
+    p#occupation {
+      font-size: 2rem;
+      padding: 2rem 0;
+      border: 1px dashed #777;
+      border-radius: 5px;
+    }
+    p.small {
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>What should I be when I grow up?</h1>
+  <p id="occupation">[click or tap]</p>
+  <p class="small">Data from <a href="https://www.theonion.com/c/american-voices">The Onion's "American Voices" series</a></p>
+<script>
+
+  var target = document.getElementById('occupation');
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'data.json', true);
+  xhr.onload = function (e) {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        var data = JSON.parse(xhr.responseText);
+
+        function new_word() {
+          var word = data[Math.floor(Math.random()*data.length)].toUpperCase();
+          target.innerHTML = word;
+        }
+
+        target.addEventListener('click', new_word);
+        document.addEventListener('keyup', new_word);
+      } else {
+        console.error(xhr.statusText);
+      }
+    }
+  };
+  xhr.onerror = function (e) {
+    console.error(xhr.statusText);
+  };
+  xhr.send(null);
+</script>
+</body>
+</html>
