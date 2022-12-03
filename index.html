@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -8,10 +8,13 @@
   <link rel="canonical" href="https://codywinchester.com/occupations" />
   <meta name="description" content="Figure out what you should be when you grow up (with some help from The Onion).">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <style>
 
     html, body {
-      font-family: 'Courier New', CourierNew, Consolas, monospace;
+      font-family: 'Atkinson Hyperlegible', 'Courier New', CourierNew, Consolas, monospace;
       text-align: center;
       text-overflow: hidden;
       word-wrap: normal;
@@ -26,7 +29,9 @@
 
     p {
       padding: 2rem;
-      background: #eee;
+      background: #800000;
+      color: white;
+      
       cursor: pointer;
       font-size: 1.7rem;
       -webkit-touch-callout: none;
@@ -38,6 +43,7 @@
     }
 
     footer.small {
+      display: none;
       font-size: 10px;
     }
 
@@ -47,18 +53,24 @@
   <h1>What should I be when I grow up?</h1>
   <p id="occupation">Loading ...</p>
   <footer class="small">
-    Data from <a href="https://www.theonion.com/c/american-voices">The Onion's "American Voices" series</a>
+    Data from <a href="https://www.theonion.com/c/american-voices">The Onion's "American Voices" series</a> 🤌 <span id="updated"></span>
   </footer>
 <script>
 
   var target = document.getElementById('occupation');
+  var updated_span = document.getElementById('updated');
+  var footer = document.getElementsByTagName('footer')[0];
 
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'data.json', true);
   xhr.onload = function (e) {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
-        var data = JSON.parse(xhr.responseText);
+        var occupation_data = JSON.parse(xhr.responseText);
+        var updated = occupation_data['updated'];
+        updated_span.innerHTML = 'Updated ' + updated;
+        footer.style.display = 'inline';
+        var data = occupation_data['data'];
 
         function new_word(e) {
           var word = data[Math.floor(Math.random()*data.length)].toUpperCase();
