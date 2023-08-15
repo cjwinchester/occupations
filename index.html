@@ -27,12 +27,17 @@
       padding: 1rem;
     }
 
-    p {
+    div#occupation {
       padding: 2rem;
       background: #006B3A;
       color: white;      
       cursor: pointer;
       font-size: 1.7rem;
+      margin-bottom: 2rem;
+    }
+
+    p#click {
+      font-size: 14pt;
       user-select: none;
     }
 
@@ -45,13 +50,17 @@
 </head>
 <body>
   <h1>What should I be when I grow up?</h1>
-  <p id="occupation">Loading ...</p>
+  <div id="occupation">
+    <p id="job">Loading ...</p>
+    <p id="click">[click or tap]</p>
+  </div>
   <footer class="small">
     Data from <a href="https://www.theonion.com/c/american-voices">The Onion's "American Voices" series</a> 🤌 <span id="updated">Updated recently</span>
   </footer>
 <script>
 
-  var target = document.getElementById('occupation');
+  var div = document.getElementById('occupation');
+  var target = document.getElementById('job');
   var updated_span = document.getElementById('updated');
   var footer = document.getElementsByTagName('footer')[0];
 
@@ -73,9 +82,8 @@
           return false;
         }
 
-        target.addEventListener('mouseup', new_word, false);
-        target.addEventListener('touchend', new_word, false);
-        target.innerHTML = '[click or tap]';
+        div.addEventListener('mouseup', new_word, false);
+        div.addEventListener('touchend', new_word, false);
 
       } else {
         console.error(xhr.statusText);
