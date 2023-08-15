@@ -82,8 +82,9 @@
           return false;
         }
 
-        div.addEventListener('mouseup', new_word, false);
-        div.addEventListener('touchend', new_word, false);
+        div.addEventListener('touchstart', new_word, false);
+        div.addEventListener('click', new_word, false);
+        div.click();
 
       } else {
         console.error(xhr.statusText);
